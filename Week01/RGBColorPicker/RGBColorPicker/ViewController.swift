@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class ViewController: UIViewController {
 
@@ -100,7 +101,16 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
     }
     
+    @IBAction func infoButtonTapped(){
+        
+        let vc = SFSafariViewController(url: URL(string: "https://en.wikipedia.org/wiki/RGB_color_model")!)
+        
+        present(vc, animated: true)
+        
+    }
+    
 }
+
 
 extension UIColor {
     var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {

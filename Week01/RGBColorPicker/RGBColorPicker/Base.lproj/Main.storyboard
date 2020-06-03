@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Set Color View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="RGBColorPicker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Set Color View Controller" id="BYZ-38-t0r" customClass="ViewController" customModule="RGBColorPicker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -105,6 +105,12 @@
                                     <action selector="setColor:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kRC-ov-Yiw"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GCh-jz-225" userLabel="InfoButton">
+                                <rect key="frame" x="195" y="746" width="24" height="24"/>
+                                <connections>
+                                    <action selector="infoButtonTapped" destination="BYZ-38-t0r" eventType="touchUpInside" id="4u5-YQ-gIx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -127,6 +133,7 @@
                             <constraint firstItem="5ye-rh-dTT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="161" id="Xtz-E8-nHJ"/>
                             <constraint firstItem="fFb-V5-ufM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IBg-Vw-BW5" secondAttribute="trailing" symbolic="YES" id="Y3O-26-66q"/>
                             <constraint firstItem="fff-YY-Rij" firstAttribute="centerY" secondItem="R1E-kM-WMx" secondAttribute="centerY" id="co3-gn-7U7"/>
+                            <constraint firstItem="GCh-jz-225" firstAttribute="centerX" secondItem="3cZ-YV-8ya" secondAttribute="centerX" id="e6V-zn-B9E"/>
                             <constraint firstItem="IBg-Vw-BW5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="33" id="ecu-1m-I58"/>
                             <constraint firstItem="s3E-KE-t5a" firstAttribute="top" secondItem="B0I-tS-e9I" secondAttribute="top" id="fCp-26-sgD"/>
                             <constraint firstItem="fff-YY-Rij" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="27" id="fhr-Zp-gaL"/>
@@ -136,11 +143,14 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="4ea-rh-oDv" secondAttribute="bottom" constant="165" id="iGz-8A-HvB"/>
                             <constraint firstItem="fff-YY-Rij" firstAttribute="top" secondItem="zjX-9K-5rc" secondAttribute="bottom" constant="8" id="mXb-GS-fdM"/>
                             <constraint firstItem="s3E-KE-t5a" firstAttribute="top" secondItem="3cZ-YV-8ya" secondAttribute="bottom" constant="8" id="pbv-B7-jqv"/>
-                            <constraint firstItem="R1E-kM-WMx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fff-YY-Rij" secondAttribute="trailing" symbolic="YES" id="trr-6X-cV1"/>
+                            <constraint firstItem="GCh-jz-225" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="195" id="tFq-z7-mA4"/>
+                            <constraint firstItem="R1E-kM-WMx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fff-YY-Rij" secondAttribute="trailing" constant="8" symbolic="YES" id="trr-6X-cV1"/>
                             <constraint firstItem="zjX-9K-5rc" firstAttribute="top" secondItem="5ye-rh-dTT" secondAttribute="bottom" constant="84" id="uEH-XP-KiQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="GCh-jz-225" secondAttribute="bottom" constant="92" id="xfs-Th-wku"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="qay-qd-C3y"/>
                     <connections>
                         <outlet property="blueLabel" destination="B0I-tS-e9I" id="VCe-oi-rw2"/>
                         <outlet property="blueSlider" destination="s3E-KE-t5a" id="tDr-4B-Rz5"/>
@@ -155,7 +165,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131.8840579710145" y="121.875"/>
+            <point key="canvasLocation" x="1042.0289855072465" y="121.875"/>
         </scene>
     </scenes>
 </document>
