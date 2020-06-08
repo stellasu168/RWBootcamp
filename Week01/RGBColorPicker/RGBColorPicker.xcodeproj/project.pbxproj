@@ -16,7 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		71C4D299248465FD001B4BF5 /* RGBColorPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RGBColorPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		71C4D299248465FD001B4BF5 /* RGBColorPicker App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RGBColorPicker App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		71C4D29C248465FD001B4BF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71C4D29E248465FD001B4BF5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		71C4D2A0248465FD001B4BF5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -48,7 +48,7 @@
 		71C4D29A248465FD001B4BF5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				71C4D299248465FD001B4BF5 /* RGBColorPicker.app */,
+				71C4D299248465FD001B4BF5 /* RGBColorPicker App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -84,7 +84,7 @@
 			);
 			name = RGBColorPicker;
 			productName = RGBColorPicker;
-			productReference = 71C4D299248465FD001B4BF5 /* RGBColorPicker.app */;
+			productReference = 71C4D299248465FD001B4BF5 /* RGBColorPicker App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -292,7 +292,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.stellasu.RGBColorPicker;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "RGBColorPicker App";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -310,7 +310,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.stellasu.RGBColorPicker;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "RGBColorPicker App";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
