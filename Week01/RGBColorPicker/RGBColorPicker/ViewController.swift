@@ -36,7 +36,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func redSliderMoved(_ slider: UISlider){
-        print(slider.value)
+        //print(slider.value)
         redSlider.value = slider.value
         var currentValue = Int()
         currentValue = Int(slider.value.rounded())
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func greenSliderMoved(_ slider: UISlider){
-        print(slider.value)
+        //print(slider.value)
         greenSlider.value = slider.value
         var currentValue = Int()
         currentValue = Int(slider.value.rounded())
@@ -52,7 +52,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func blueSliderMoved(_ slider: UISlider){
-        print(slider.value)
+        //print(slider.value)
         blueSlider.value = slider.value
         var currentValue = Int()
         currentValue = Int(slider.value.rounded())
@@ -82,9 +82,9 @@ class ViewController: UIViewController {
     
     func assignLabelsAndBackground(){
                 
-        redVal = redSlider.value
-        greenVal = greenSlider.value
-        blueVal = blueSlider.value
+        redVal = (redSlider.value)/255
+        greenVal = (greenSlider.value)/255
+        blueVal = (blueSlider.value)/255
     
         view.backgroundColor = UIColor(red: CGFloat(redVal), green: CGFloat(greenVal), blue: CGFloat(blueVal), alpha: 1.0)
 
@@ -112,14 +112,14 @@ class ViewController: UIViewController {
 }
 
 
-extension UIColor {
-    var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
-        var red: CGFloat = 0
-        var green: CGFloat = 0
-        var blue: CGFloat = 0
-        var alpha: CGFloat = 0
-        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-
-        return (red, green, blue, alpha)
-    }
-}
+//extension UIColor {
+//    var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+//        var red: CGFloat = 0
+//        var green: CGFloat = 0
+//        var blue: CGFloat = 0
+//        var alpha: CGFloat = 0
+//        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+//
+//        return (red, green, blue, alpha)
+//    }
+//}
