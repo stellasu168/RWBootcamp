@@ -66,10 +66,19 @@
 		7183F882248F424500F4B7FF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				CDCB57E61BED8F4800003224 /* ViewController.swift */,
 				CDCB57FA1BED986300003224 /* AboutViewController.swift */,
+				CDCB57E61BED8F4800003224 /* ViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		71CC8FA32491A37000F49FD3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CDCB57E81BED8F4800003224 /* Main.storyboard */,
+				181A114E22AD925B003EA9CF /* LaunchScreen.storyboard */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		CDCB57D81BED8F4800003224 = {
@@ -91,12 +100,11 @@
 		CDCB57E31BED8F4800003224 /* RGBullsEye */ = {
 			isa = PBXGroup;
 			children = (
+				71CC8FA32491A37000F49FD3 /* Views */,
 				CDCB57E41BED8F4800003224 /* AppDelegate.swift */,
 				7183F882248F424500F4B7FF /* Controllers */,
 				7183F880248F420200F4B7FF /* Models */,
 				CDCB57EB1BED8F4800003224 /* Assets.xcassets */,
-				181A114E22AD925B003EA9CF /* LaunchScreen.storyboard */,
-				CDCB57E81BED8F4800003224 /* Main.storyboard */,
 				CDCB57F01BED8F4800003224 /* Info.plist */,
 			);
 			path = RGBullsEye;

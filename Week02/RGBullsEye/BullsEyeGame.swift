@@ -32,14 +32,13 @@ class BullsEyeGame {
     
     func newRound() {
         roundNumber += 1
-        roundScore = 0
         targetValue.randomColor()
     }
     
     func startOver() {
         totalScore = 0
-        roundScore = 0
         roundNumber = 0
+        roundScore = 0
         newRound()
     }
 
@@ -50,7 +49,6 @@ class BullsEyeGame {
        roundScore = 100 - Int(difference)
        
        totalScore = totalScore + roundScore
-        print(totalScore)
 
        switch difference {
        case 0:
@@ -72,29 +70,5 @@ class BullsEyeGame {
        }
 
      }
-     
-    
-//    let difference = abs(targetValue - currentValue)
-//    var points = 100 - difference
-//
-//    score += points
-//
-//    let title: String
-//    if difference == 0 {
-//      title = "Perfect!"
-//      points += 100
-//    } else if difference < 5 {
-//      title = "You almost had it!"
-//      if difference == 1 {
-//        points += 50
-//      }
-//    } else if difference < 10 {
-//      title = "Pretty good!"
-//    } else {
-//      title = "Not even close..."
-//    }
-//
-//    let message = "You scored \(points) points"
-   
-    
+         
 }
