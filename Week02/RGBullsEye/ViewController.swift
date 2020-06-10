@@ -72,16 +72,47 @@ class ViewController: UIViewController {
     
   }
   
+  // When 'hit me' button is pressed
   @IBAction func showAlert(sender: AnyObject) {
+    
+    //Target score = guessed score
+    //game.calculateRoundResult(for: rgb, against: game.targetValue)
+    //print(rgb)
+    //print(game.targetValue)
+    //updateView()
+    game.calculateRoundResult(for: rgb, against: game.targetValue)
+
+    // Show the alert message
+    let alert = UIAlertController(title: game.alertMessage,
+                                  message: "You scored \(game.roundScore) points",
+                                  preferredStyle: .alert)
+    
+    let action = UIAlertAction(title: "OK", style: .default, handler: { action in
+        self.game.startOver()
+        self.game.roundNumber = self.game.roundNumber+1
+        self.updateView()
+    })
+    
+    alert.addAction(action)
+    present(alert, animated: true, completion: nil)
+    
+    // Update roundNumber
+    // Reset the slider to the middle
+
 
   }
   
   @IBAction func startOver(sender: AnyObject) {
-    game.newRound()
+    game.startOver()
     updateView()
   }
   
   func updateView() {
+    
+    targetLabel.backgroundColor = UIColor(rgbStruct: game.targetValue)
+    print("Total Score is: \(game.totalScore)")
+    roundLabel.text = "Round: \(game.roundNumber)"
+    scoreLabel.text = "Score: \(game.totalScore)"
 
   }
   

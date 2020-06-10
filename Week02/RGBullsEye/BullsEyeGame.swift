@@ -45,9 +45,13 @@ class BullsEyeGame {
 
     // Change some stuff here later
     func calculateRoundResult(for guess: RGB, against target: RGB) {
+        
        let difference = guess.difference(target: target) * 100
        roundScore = 100 - Int(difference)
        
+       totalScore = totalScore + roundScore
+        print(totalScore)
+
        switch difference {
        case 0:
          roundScore += 100
@@ -67,10 +71,30 @@ class BullsEyeGame {
          alertMessage = "Not even close..."
        }
 
-       totalScore += roundScore
      }
      
     
+//    let difference = abs(targetValue - currentValue)
+//    var points = 100 - difference
+//
+//    score += points
+//
+//    let title: String
+//    if difference == 0 {
+//      title = "Perfect!"
+//      points += 100
+//    } else if difference < 5 {
+//      title = "You almost had it!"
+//      if difference == 1 {
+//        points += 50
+//      }
+//    } else if difference < 10 {
+//      title = "Pretty good!"
+//    } else {
+//      title = "Not even close..."
+//    }
+//
+//    let message = "You scored \(points) points"
    
     
 }
