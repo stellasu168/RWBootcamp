@@ -77,6 +77,10 @@ class ViewController: UIViewController {
     @IBAction func showAlert(sender: AnyObject) {
         
         game.calculateRoundResult(for: guessingRGB, against: game.targetValue)
+        
+        // Can caulcuate the message here since it's a UI thing
+        
+        
         // Show the alert message
         let alert = UIAlertController(title: game.alertMessage,
                                       message: "You scored \(game.roundScore) points",
