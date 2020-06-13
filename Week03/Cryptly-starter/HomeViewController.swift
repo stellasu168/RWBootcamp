@@ -42,6 +42,9 @@ class HomeViewController: UIViewController{
   @IBOutlet weak var view2TextLabel: UILabel!
   @IBOutlet weak var view3TextLabel: UILabel!
   @IBOutlet weak var themeSwitch: UISwitch!
+  
+  let cryptoData = DataGenerator.shared.generateData()
+  let myCryptoCurrency = CryptoCurrency()
     
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -50,6 +53,7 @@ class HomeViewController: UIViewController{
     setView1Data()
     setView2Data()
     setView3Data()
+    print(cryptoData![0].name)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -92,13 +96,18 @@ class HomeViewController: UIViewController{
     view1TextLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
     view2TextLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
   }
-  
+    
+  // Display a comma separated list of every currency you own.
+  //Output = Bitcoin, Etherem, Tron, Litecoin, Ripple, NXT,
   func setView1Data() {
+      
   }
   
+  // In the second view, you have to display a comma separated list of every currency which increased from its previous value
   func setView2Data() {
   }
   
+  // And in the third view, display a comma separated list of every currency which decreased from its previous value.
   func setView3Data() {
   }
   
