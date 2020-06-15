@@ -53,8 +53,7 @@ class HomeViewController: UIViewController{
     setView1Data()
     setView2Data()
     setView3Data()
-    print(cryptoData)
-    //myCryptoCurrency?.name = cryptoData![0].name
+    //print(cryptoData)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -99,56 +98,54 @@ class HomeViewController: UIViewController{
     view2TextLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
   }
     
-  // Display a comma separated list of every currency you own.
-  //Output = Bitcoin, Etherem, Tron, Litecoin, Ripple, NXT,
-  func setView1Data() {
-    
-    // guard let will unwrap an optional for you, if it's nil inside, it will exit the loop.
-    guard let cryptoData = cryptoData else {
-      print("No data")
-      return
+    // Display a comma separated list of every currency you own.
+    // Output = Bitcoin, Etherem, Tron, Litecoin, Ripple, NXT,
+    func setView1Data() {
+        
+        // guard let will unwrap an optional for you, if it's nil inside, it will exit the loop.
+        guard let cryptoData = cryptoData else {
+            print("No data")
+            return
+        }
+        
+        // Looping through cryptoData and store the names in allCryptoCurrency
+        // https://medium.com/@lucianoalmeida1/a-little-bit-about-the-cool-reduce-in-swift-306edd9ceb57
+        let allCryptoCurrencyName = cryptoData.reduce("") {
+            (accumulator, current) -> String in
+            return accumulator.isEmpty ? "\(current.name)" : accumulator + ", \(current.name)"
+        }
+        view1TextLabel.text = allCryptoCurrencyName
+        
     }
-    
-    // Looping through cryptoData and store the names in allCryptoCurrency
-    let allCryptoCurrencyName = cryptoData.reduce("") {
-      result, item in
-      return item.name + ", " + result
-    }
-    view1TextLabel.text = String(allCryptoCurrencyName)
-  }
   
-  // In the second view, you have to display a comma separated list of every currency which increased from its previous value
-  func setView2Data() {
-    
-    guard let cryptoData = cryptoData else {
-      print("No data")
-      return
+    // In the second view, you have to display a comma separated list of every currency which increased from its previous value
+    func setView2Data() {
+        guard let cryptoData = cryptoData else {
+            print("No data")
+            return
+        }
+        
+        let increasedCryptoCurrency = cryptoData.filter { $0.previousValue < $0.currentValue
+        }.reduce("") {(accumulator, current) -> String in
+            return accumulator.isEmpty ? "\(current.name)" : accumulator + ", \(current.name)"
+        }
+        view2TextLabel.text = increasedCryptoCurrency
     }
-    
-    let increasedCryptoCurrency = cryptoData.filter { $0.previousValue < $0.currentValue
-    }.reduce("") { (result, item) in
-      return item.name + ", " + result
-    }
-    
-    view2TextLabel.text = String(increasedCryptoCurrency)
-  }
   
   // And in the third view, display a comma separated list of every currency which decreased from its previous value.
-  func setView3Data() {
-    
-    guard let cryptoData = cryptoData else {
-      print("No data")
-      return
+    func setView3Data() {
+        guard let cryptoData = cryptoData else {
+            print("No data")
+            return
+        }
+        
+        let decreasedCryptoCurrency = cryptoData.filter { $0.previousValue > $0.currentValue
+        }.reduce("") { (accumulator, current) -> String in
+            return accumulator.isEmpty ? "\(current.name)" : accumulator + ", \(current.name)"
+        }
+        view3TextLabel.text = decreasedCryptoCurrency
+        
     }
-
-    let decreasedCryptoCurrency = cryptoData.filter { $0.previousValue > $0.currentValue
-    }.reduce("") { (result, item) in
-      return item.name + ", " + result
-    }
-
-    view3TextLabel.text = String(decreasedCryptoCurrency)
-  
-  }
   
   @IBAction func switchPressed(_ sender: Any) {
 //    if themeSwitch.isOn {
