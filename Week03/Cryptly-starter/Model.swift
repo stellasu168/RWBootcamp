@@ -37,5 +37,12 @@ struct CryptoCurrency: Codable {
   var symbol: String
   var currentValue: Double
   var previousValue: Double
-
+  
+//  init(name: String, symbol: String, currentValue: Double, previousValue: Double ) {
+//    self.name = name
+//    self.symbol = symbol
+//    self.currentValue = currentValue
+//    self.previousValue = previousValue
+//  }
+  
 }

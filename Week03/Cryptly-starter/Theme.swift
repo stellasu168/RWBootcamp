@@ -31,7 +31,12 @@
 /// THE SOFTWARE.
 
 import Foundation
+import UIKit
 
 protocol Theme {
   
+}
+
+struct DarkTheme: Theme {
+  let backgroundColor : UIColor = .black
 }
