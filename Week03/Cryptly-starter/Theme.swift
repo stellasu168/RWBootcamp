@@ -35,8 +35,26 @@ import UIKit
 
 protocol Theme {
   
+  var backgroundColor : UIColor { get } //View’s background color
+  var textColor : UIColor { get }
+  var borderColor : UIColor { get } //Border color of views which contain data
+  var widgetBackgroundColor : UIColor { get }
+  
 }
 
+struct LightTheme: Theme{
+  
+  var backgroundColor : UIColor = .white
+  var textColor: UIColor = .black
+  var borderColor: UIColor = .gray
+  var widgetBackgroundColor: UIColor = .lightGray
+  
+}
 struct DarkTheme: Theme {
-  let backgroundColor : UIColor = .black
+  
+  var backgroundColor : UIColor = .black
+  var textColor: UIColor = .white
+  var borderColor: UIColor = .white
+  var widgetBackgroundColor: UIColor = .lightGray
+  
 }

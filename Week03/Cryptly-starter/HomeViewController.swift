@@ -53,7 +53,7 @@ class HomeViewController: UIViewController{
     setView1Data()
     setView2Data()
     setView3Data()
-    print(cryptoData![0].currentValue)
+    print(cryptoData)
     //myCryptoCurrency?.name = cryptoData![0].name
   }
   
@@ -151,11 +151,12 @@ class HomeViewController: UIViewController{
   }
   
   @IBAction func switchPressed(_ sender: Any) {
-    if themeSwitch.isOn {
-      ThemeManager.shared.set(theme: DarkTheme())
-    } else {
-      
-    }
-
+//    if themeSwitch.isOn {
+//      ThemeManager.shared.set(theme: DarkTheme())
+//    } else {
+//      ThemeManager.shared.set(theme: LightTheme())
+//    }
+    print(themeSwitch.isOn)
+    ThemeManager.shared.set(theme: themeSwitch.isOn ? DarkTheme() : LightTheme())
   }
 }
