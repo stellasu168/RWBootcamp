@@ -34,27 +34,27 @@ import Foundation
 import UIKit
 
 protocol Theme {
-  
   var backgroundColor : UIColor { get } //View’s background color
   var textColor : UIColor { get }
   var borderColor : UIColor { get } //Border color of views which contain data
   var widgetBackgroundColor : UIColor { get }
-  
 }
 
 struct LightTheme: Theme{
-  
   var backgroundColor : UIColor = .white
   var textColor: UIColor = .black
-  var borderColor: UIColor = .gray
-  var widgetBackgroundColor: UIColor = .lightGray
-  
+  var borderColor: UIColor = .lightGray
+  var widgetBackgroundColor: UIColor = .white
 }
 struct DarkTheme: Theme {
-  
   var backgroundColor : UIColor = .black
   var textColor: UIColor = .white
   var borderColor: UIColor = .white
   var widgetBackgroundColor: UIColor = .lightGray
-  
+}
+
+protocol Themeable {
+  func registerForTheme()
+  func unregisterForTheme()
+  func themeChanged()
 }
