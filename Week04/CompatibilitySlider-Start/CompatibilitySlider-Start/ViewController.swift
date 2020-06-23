@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var questionLabel: UILabel!
 
-    var compatibilityItems = ["Cats", "Dogs", "Hiking", "Painting"] // Add more!
+    var compatibilityItems = ["Cats", "Dogs", "Hiking", "Painting", "Traveling", "Reading", "Singing"]
     var currentItemIndex = 0
 
     var person1 = Person(id: 1, items: [:])
@@ -23,9 +23,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        compatibilityItemLabel.text = compatibilityItems[0].description
-        questionLabel.text = "User 1"
-        currentPerson = person1
+        resetGame()
     }
 
     @IBAction func sliderValueChanged(_ sender: UISlider) {
@@ -34,23 +32,19 @@ class ViewController: UIViewController {
 
     func resetGame(){
         currentItemIndex = 0
-        questionLabel.text = "User 1"
+        questionLabel.text = "Person 1, how do you feel about..."
         currentPerson = person1
         compatibilityItemLabel.text = compatibilityItems[0].description
-        print("reset the game")
     }
     @IBAction func didPressNextItemButton(_ sender: Any) {
         // Save the user's score for the first item as a dictionary
         let currentItem = compatibilityItems[currentItemIndex]
         currentPerson?.items.updateValue(slider.value, forKey: currentItem)
         currentItemIndex += 1
-        print(currentPerson!.id)
-        print(currentItem)
         // Go to the next item in the array compatibilityItems
         if (currentPerson?.id == 2 && (currentItemIndex == compatibilityItems.count)) {
-            //print(calculateCompatibility())
             
-            let alert = UIAlertController(title: "Your compatibility score is: ", message: calculateCompatibility(), preferredStyle: .alert)
+            let alert = UIAlertController(title: "Results", message: "You two are \(calculateCompatibility()) compatible.", preferredStyle: .alert)
             
             //alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
@@ -66,8 +60,7 @@ class ViewController: UIViewController {
             compatibilityItemLabel.text = compatibilityItems[currentItemIndex].description
         } else {
             currentPerson = person2
-            questionLabel.text = "User 2"
-            print(currentPerson!.id)
+            questionLabel.text = "Person 2, how do you feel about..."
             compatibilityItemLabel.text = compatibilityItems[0].description
             currentItemIndex = 0
         }
