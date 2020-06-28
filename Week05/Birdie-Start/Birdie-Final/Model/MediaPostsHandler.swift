@@ -8,6 +8,9 @@
 
 import UIKit
 
+// MediaPostsHandler is a Singleton class. So you will get the same memory address every time.
+// This is a benefit bc your object will use in multiple places and this will give you the same number of array everytime.
+// This provide a globally access, shared instace of a class. It provides a unified access point to the object.
 class MediaPostsHandler: NSObject {
     static let shared = MediaPostsHandler()
     var mediaPosts: [MediaPost] = []

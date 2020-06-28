@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableview: UITableView!
 
@@ -23,12 +23,29 @@ class ViewController: UIViewController {
 
     @IBAction func didPressCreateTextPostButton(_ sender: Any) {
 
+        // Make a UIAlert pop up that asks for the user's username and the text of the post
+        
+        // You can add the new text post with MediaPostsHandler.shared.addTextPost.
+        
     }
 
     @IBAction func didPressCreateImagePostButton(_ sender: Any) {
 
     }
 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(MediaPostsHandler.shared.mediaPosts.count)
+        return MediaPostsHandler.shared.mediaPosts.count
+        
+    }
+    
+    // Get call everytime a tableview needs a cell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // reload
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostListItem", for: indexPath)
+        
+        return cell
+    }
 }
 
 
