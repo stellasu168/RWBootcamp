@@ -15,10 +15,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()
+        
+      
     }
 
     func setUpTableView() {
         // Set delegates, register custom cells, set up datasource, etc.
+        //tableview.estimatedRowHeight = 100.0
+        //tableview.rowHeight = UITableView.automaticDimension
+        
+        tableview.delegate = self
+        tableview.dataSource = self
+    }
+    
+    //set the delegate
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 
     @IBAction func didPressCreateTextPostButton(_ sender: Any) {
@@ -35,14 +47,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print(MediaPostsHandler.shared.mediaPosts.count)
-        return MediaPostsHandler.shared.mediaPosts.count
+        return 3
         
     }
     
     // Get call everytime a tableview needs a cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // reload
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostListItem", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostListItemCell", for: indexPath)
         
         return cell
     }
