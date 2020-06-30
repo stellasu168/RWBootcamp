@@ -83,12 +83,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostListItemCell", for: indexPath) as! CustomTableViewCell
 
         cell.usernameLabel.text = mediaPost.userName
-        //cell.timeStampLabel.text = mediaPost.timestamp
+        cell.timeStampLabel.text = mediaPost.timestamp.toString()
         cell.postLabel.text = mediaPost.textBody
 
         return cell
     }
 }
 
-
-
+extension Date {
+    func toString(withFormat format: String = "d MMM, HH:mm") -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        let str = dateFormatter.string(from: self)
+        return str
+    }
+}
