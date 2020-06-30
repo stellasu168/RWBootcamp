@@ -50,7 +50,7 @@
                                 <rect key="frame" x="0.0" y="134.5" width="414" height="761.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostListItemCell" rowHeight="100" id="j6t-ZJ-8Xe">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostListItemCell" rowHeight="100" id="j6t-ZJ-8Xe" customClass="CustomTableViewCell" customModule="Birdie_Final" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="j6t-ZJ-8Xe" id="6DE-eY-0xb">
@@ -105,6 +105,11 @@
                                                 <constraint firstAttribute="bottom" secondItem="Ko8-8c-UF5" secondAttribute="bottom" constant="50" id="xuR-T8-eQG"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="postLabel" destination="SgE-38-icv" id="c1Z-c4-fm0"/>
+                                            <outlet property="timeStampLabel" destination="gjM-UB-XXs" id="Ee4-A8-jfq"/>
+                                            <outlet property="usernameLabel" destination="W06-Me-qc1" id="Jy8-sy-XjL"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

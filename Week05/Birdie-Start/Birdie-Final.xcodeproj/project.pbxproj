@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		71F99A2B24AABA4400AA0882 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F99A2A24AABA4400AA0882 /* CustomTableViewCell.swift */; };
 		C3C9D35E249B324B001F55A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C9D35D249B324B001F55A6 /* AppDelegate.swift */; };
 		C3C9D360249B324B001F55A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C9D35F249B324B001F55A6 /* SceneDelegate.swift */; };
 		C3C9D362249B324B001F55A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C9D361249B324B001F55A6 /* ViewController.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		71F99A2A24AABA4400AA0882 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		C3C9D35A249B324B001F55A6 /* Birdie-Final.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Birdie-Final.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3C9D35D249B324B001F55A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3C9D35F249B324B001F55A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 		C3C9D35C249B324B001F55A6 /* Birdie-Final */ = {
 			isa = PBXGroup;
 			children = (
+				71F99A2A24AABA4400AA0882 /* CustomTableViewCell.swift */,
 				C3C9D390249B325C001F55A6 /* AppDelegate */,
 				C3C9D399249B3484001F55A6 /* Controller */,
 				C3C9D398249B3479001F55A6 /* Model */,
@@ -314,6 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71F99A2B24AABA4400AA0882 /* CustomTableViewCell.swift in Sources */,
 				C3C9D393249B3448001F55A6 /* TextPostModel.swift in Sources */,
 				C3C9D395249B3453001F55A6 /* ImagePostModel.swift in Sources */,
 				C3C9D362249B324B001F55A6 /* ViewController.swift in Sources */,
