@@ -33,21 +33,58 @@
 import UIKit
 
 class CompactViewController: UIViewController {
+  enum Section {
+    case main
+  }
 
   @IBOutlet weak var compactCollectionView: UICollectionView!
+  
+  var dataSource: UICollectionViewDiffableDataSource<Section, Pokemon>!
+  
+  // This will return an array of Pokemons
+  let pokemons = PokemonGenerator.shared.generatePokemons()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     // Do any additional setup after loading the view.
     compactCollectionView.collectionViewLayout = configureLayout()
+    configureDataSource()
   }
   
   func configureLayout() -> UICollectionViewCompositionalLayout {
-    let itemSize = NSCollectionLayoutSize(widthDimension: ., heightDimension: <#T##NSCollectionLayoutDimension#>)
-    return itemSize
+    let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.333), heightDimension: .fractionalHeight(1.0))
+    let item = NSCollectionLayoutItem(layoutSize: itemSize)
+    item.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4)
+    
+    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.333))
+    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+    
+    let section = NSCollectionLayoutSection(group: group)
+
+    return UICollectionViewCompositionalLayout(section: section)
   }
 
+  func configureDataSource() {
+    dataSource = UICollectionViewDiffableDataSource<Section, Pokemon>(collectionView: compactCollectionView) {
+      (compactCollectionView, indexPath, pokemons) -> UICollectionViewCell? in
+      
+      guard let cell = compactCollectionView.dequeueReusableCell(withReuseIdentifier: PokemonCell.reuseIdentifier, for: indexPath) as? PokemonCell else {
+        fatalError("Cannot create new cell")
+      }
+      cell.pokemonLabel.text = pokemons.pokemonName
+      cell.pokemonImage.image = UIImage(named: String(pokemons.pokemonId))
+      
+      return cell
+    }
+    
+    var initialSnapshot = NSDiffableDataSourceSnapshot<Section, Pokemon>()
+    initialSnapshot.appendSections([.main])
+    initialSnapshot.appendItems(pokemons)
+
+    dataSource.apply(initialSnapshot, animatingDifferences: false)
+    
+  }
     
 
 }

@@ -3,6 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -72,7 +73,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pokemon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mmX-yB-Csc">
-                                        <rect key="frame" x="147" y="14" width="81" height="28"/>
+                                        <rect key="frame" x="145" y="16.5" width="85.5" height="23.5"/>
                                         <fontDescription key="fontDescription" name="PokemonSolidNormal" family="Pokemon Solid" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -98,13 +99,40 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ykM-vo-b5S">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PokemonCell" id="ykM-vo-b5S" customClass="PokemonCell" customModule="Pokedex_starter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="nsu-6f-S6C">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ka3-CF-dif">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RZe-bz-OZb">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="80"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jmm-4D-WiM">
+                                                    <rect key="frame" x="0.0" y="79" width="100" height="20"/>
+                                                    <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" name="rw-light"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="RZe-bz-OZb" secondAttribute="trailing" id="KWK-3X-MWS"/>
+                                                <constraint firstAttribute="bottom" secondItem="Jmm-4D-WiM" secondAttribute="bottom" id="LvC-ej-Tha"/>
+                                                <constraint firstItem="Jmm-4D-WiM" firstAttribute="top" secondItem="RZe-bz-OZb" secondAttribute="bottom" id="VTw-f4-yvR"/>
+                                                <constraint firstItem="Jmm-4D-WiM" firstAttribute="leading" secondItem="ka3-CF-dif" secondAttribute="leading" id="fdS-eB-s8j"/>
+                                                <constraint firstItem="RZe-bz-OZb" firstAttribute="leading" secondItem="ka3-CF-dif" secondAttribute="leading" id="iB9-EX-A4d"/>
+                                                <constraint firstAttribute="trailing" secondItem="Jmm-4D-WiM" secondAttribute="trailing" id="qas-av-Hwt"/>
+                                                <constraint firstItem="RZe-bz-OZb" firstAttribute="top" secondItem="ka3-CF-dif" secondAttribute="top" id="uMi-U2-PfU"/>
+                                            </constraints>
                                         </collectionViewCellContentView>
+                                        <size key="customSize" width="100" height="100"/>
+                                        <connections>
+                                            <outlet property="pokemonImage" destination="RZe-bz-OZb" id="Bvm-OM-gBH"/>
+                                            <outlet property="pokemonLabel" destination="Jmm-4D-WiM" id="8f7-7w-F0e"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -163,5 +191,8 @@
         <image name="selected_up" width="23" height="23"/>
         <image name="unselected_down" width="23" height="23"/>
         <image name="unselected_up" width="23" height="23"/>
+        <namedColor name="rw-light">
+            <color red="0.94900000095367432" green="0.9649999737739563" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
