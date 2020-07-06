@@ -30,13 +30,24 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import Foundation
+import UIKit
 
-struct Pokemon {
-  var pokemonId : Int
-  var pokemonName : String
-  var baseExperience : Int
-  var weight : Int
-  var height : Int
+class CompactViewController: UIViewController {
+
+  @IBOutlet weak var compactCollectionView: UICollectionView!
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    // Do any additional setup after loading the view.
+    compactCollectionView.collectionViewLayout = configureLayout()
+  }
+  
+  func configureLayout() -> UICollectionViewCompositionalLayout {
+    let itemSize = NSCollectionLayoutSize(widthDimension: ., heightDimension: <#T##NSCollectionLayoutDimension#>)
+    return itemSize
+  }
+
+    
+
 }
-
