@@ -73,7 +73,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pokemon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mmX-yB-Csc">
-                                        <rect key="frame" x="145" y="16.5" width="85.5" height="23.5"/>
+                                        <rect key="frame" x="147" y="14" width="81" height="28"/>
                                         <fontDescription key="fontDescription" name="PokemonSolidNormal" family="Pokemon Solid" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -107,11 +107,11 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RZe-bz-OZb">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="80"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="77"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jmm-4D-WiM">
-                                                    <rect key="frame" x="0.0" y="79" width="100" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jmm-4D-WiM">
+                                                    <rect key="frame" x="0.0" y="77" width="100" height="23"/>
                                                     <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="rw-light"/>
@@ -119,13 +119,14 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="RZe-bz-OZb" secondAttribute="trailing" id="KWK-3X-MWS"/>
-                                                <constraint firstAttribute="bottom" secondItem="Jmm-4D-WiM" secondAttribute="bottom" id="LvC-ej-Tha"/>
-                                                <constraint firstItem="Jmm-4D-WiM" firstAttribute="top" secondItem="RZe-bz-OZb" secondAttribute="bottom" id="VTw-f4-yvR"/>
-                                                <constraint firstItem="Jmm-4D-WiM" firstAttribute="leading" secondItem="ka3-CF-dif" secondAttribute="leading" id="fdS-eB-s8j"/>
-                                                <constraint firstItem="RZe-bz-OZb" firstAttribute="leading" secondItem="ka3-CF-dif" secondAttribute="leading" id="iB9-EX-A4d"/>
-                                                <constraint firstAttribute="trailing" secondItem="Jmm-4D-WiM" secondAttribute="trailing" id="qas-av-Hwt"/>
-                                                <constraint firstItem="RZe-bz-OZb" firstAttribute="top" secondItem="ka3-CF-dif" secondAttribute="top" id="uMi-U2-PfU"/>
+                                                <constraint firstItem="Jmm-4D-WiM" firstAttribute="top" secondItem="RZe-bz-OZb" secondAttribute="bottom" id="17v-s4-dkw"/>
+                                                <constraint firstItem="RZe-bz-OZb" firstAttribute="leading" secondItem="ka3-CF-dif" secondAttribute="leading" id="2Wb-fL-dEZ"/>
+                                                <constraint firstItem="Jmm-4D-WiM" firstAttribute="height" secondItem="RZe-bz-OZb" secondAttribute="height" multiplier="0.3" id="HCH-3e-T56"/>
+                                                <constraint firstItem="RZe-bz-OZb" firstAttribute="top" secondItem="ka3-CF-dif" secondAttribute="top" id="Qhb-6F-ske"/>
+                                                <constraint firstAttribute="trailing" secondItem="RZe-bz-OZb" secondAttribute="trailing" id="Xgw-mJ-SA0"/>
+                                                <constraint firstAttribute="trailing" secondItem="Jmm-4D-WiM" secondAttribute="trailing" id="cDg-AG-Wjp"/>
+                                                <constraint firstItem="Jmm-4D-WiM" firstAttribute="leading" secondItem="ka3-CF-dif" secondAttribute="leading" id="e9O-Ys-frb"/>
+                                                <constraint firstAttribute="bottom" secondItem="Jmm-4D-WiM" secondAttribute="bottom" id="pIz-xt-oVE"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="100" height="100"/>
