@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 
-
 protocol SandwichDataSource {
   func saveSandwich(_: SandwichData)
 }
@@ -18,10 +17,10 @@ class SandwichViewController: UITableViewController, SandwichDataSource {
     let searchController = UISearchController(searchResultsController: nil)
     var sandwiches = [SandwichData]()
     var filteredSandwiches = [SandwichData]()
-    // Homework
-    let defaults = UserDefaults.standard
     
-    // Homework
+    // Homework - from lecture Core data part 1
+    // Homework - part 1 (Save the selected index into User Defaults)
+    let defaults = UserDefaults.standard
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
@@ -46,7 +45,7 @@ class SandwichViewController: UITableViewController, SandwichDataSource {
     searchController.searchBar.scopeButtonTitles = SauceAmount.allCases.map { $0.rawValue }
     searchController.searchBar.delegate = self
 
-    // Homework
+    // Homework - part 1 (Save the selected index into User Defaults)
     searchController.searchBar.selectedScopeButtonIndex = defaults.integer(forKey: "selectedScope")
   }
 
@@ -87,16 +86,15 @@ class SandwichViewController: UITableViewController, SandwichDataSource {
   func filterContentForSearchText(_ searchText: String,
                                   sauceAmount: SauceAmount? = nil) {
     filteredSandwiches = sandwiches.filter { (sandwhich: SandwichData) -> Bool in
-      let doesSauceAmountMatch = sauceAmount == .any || sandwhich.sauceAmount == sauceAmount
-
-      if isSearchBarEmpty {
-        return doesSauceAmountMatch
-      } else {
-        return doesSauceAmountMatch && sandwhich.name.lowercased()
-          .contains(searchText.lowercased())
-      }
+        let doesSauceAmountMatch = sauceAmount == .any || sandwhich.sauceAmount == sauceAmount
+        
+        if isSearchBarEmpty {
+            return doesSauceAmountMatch
+        } else {
+            return doesSauceAmountMatch && sandwhich.name.lowercased()
+                .contains(searchText.lowercased())
+        }
     }
-    
     tableView.reloadData()
   }
   
@@ -132,12 +130,37 @@ class SandwichViewController: UITableViewController, SandwichDataSource {
   }
 }
 
+// MARK: - Helper Functions
+// Homework - part 1 (Save the selected index into User Defaults)
+func determineCurrentScopeSauceAmountIndex(for sauceAmount: SauceAmount?) -> Int {
+  switch(sauceAmount) {
+  case .any:
+    return 0
+  case .tooMuch:
+    return 2
+  default:
+    return 1
+  }
+}
+
 // MARK: - UISearchResultsUpdating
 extension SandwichViewController: UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
     let searchBar = searchController.searchBar
-    let sauceAmount = SauceAmount(rawValue:
-      searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
+    
+    // Homework - part 1 (Save the selected index into User Defaults)
+    let sauceAmountRawValue = defaults.object(forKey: "SauceType") as? String ?? String()
+    
+    let sauceAmount: SauceAmount?
+    if sauceAmountRawValue.isEmpty {
+      sauceAmount = SauceAmount(rawValue: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
+    } else {
+      sauceAmount = SauceAmount(rawValue: sauceAmountRawValue)
+      searchBar.selectedScopeButtonIndex = determineCurrentScopeSauceAmountIndex(for: sauceAmount)
+    }
+    
+    //    let sauceAmount = SauceAmount(rawValue:
+    //    searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
 
     filterContentForSearchText(searchBar.text!, sauceAmount: sauceAmount)
   }
@@ -149,7 +172,12 @@ extension SandwichViewController: UISearchBarDelegate {
       selectedScopeButtonIndexDidChange selectedScope: Int) {
     let sauceAmount = SauceAmount(rawValue:
       searchBar.scopeButtonTitles![selectedScope])
+   
+    // Homework - part 1 (Save the selected index into User Defaults)
+    defaults.set(sauceAmount?.rawValue, forKey: "SauceType")
+
     filterContentForSearchText(searchBar.text!, sauceAmount: sauceAmount)
   }
 }
+
 
