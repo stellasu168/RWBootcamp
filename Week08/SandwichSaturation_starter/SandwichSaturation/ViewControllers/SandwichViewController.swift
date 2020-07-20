@@ -7,22 +7,30 @@
 //
 
 import UIKit
+import CoreData
+
 
 protocol SandwichDataSource {
   func saveSandwich(_: SandwichData)
 }
 
 class SandwichViewController: UITableViewController, SandwichDataSource {
-  let searchController = UISearchController(searchResultsController: nil)
-  var sandwiches = [SandwichData]()
-  var filteredSandwiches = [SandwichData]()
-
-  required init?(coder: NSCoder) {
-    super.init(coder: coder)
+    let searchController = UISearchController(searchResultsController: nil)
+    var sandwiches = [SandwichData]()
+    var filteredSandwiches = [SandwichData]()
+    // Homework
+    let defaults = UserDefaults.standard
     
-    loadSandwiches()
-  }
-  
+    // Homework
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
+        loadSandwiches()
+    }
+    
   override func viewDidLoad() {
     super.viewDidLoad()
         
@@ -37,12 +45,16 @@ class SandwichViewController: UITableViewController, SandwichDataSource {
     definesPresentationContext = true
     searchController.searchBar.scopeButtonTitles = SauceAmount.allCases.map { $0.rawValue }
     searchController.searchBar.delegate = self
+
+    // Homework
+    searchController.searchBar.selectedScopeButtonIndex = defaults.integer(forKey: "selectedScope")
   }
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
   }
   
+    // Seeded with some sandwich data
   func loadSandwiches() {
     let sandwichArray = [SandwichData(name: "Bagel Toast", sauceAmount: .none, imageName: "sandwich1"),
                          SandwichData(name: "Bologna", sauceAmount: .none, imageName: "sandwich2"),
