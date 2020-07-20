@@ -26,7 +26,6 @@ class SandwichViewController: UITableViewController, SandwichDataSource {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        
         loadSandwiches()
     }
     
@@ -55,24 +54,33 @@ class SandwichViewController: UITableViewController, SandwichDataSource {
   
     // Seeded with some sandwich data
   func loadSandwiches() {
-    let sandwichArray = [SandwichData(name: "Bagel Toast", sauceAmount: .none, imageName: "sandwich1"),
-                         SandwichData(name: "Bologna", sauceAmount: .none, imageName: "sandwich2"),
-                         SandwichData(name: "Breakfast Roll", sauceAmount: .none, imageName: "sandwich3"),
-                         SandwichData(name: "Club", sauceAmount: .none, imageName: "sandwich4"),
-                         SandwichData(name: "Sub", sauceAmount: .none, imageName: "sandwich5"),
-                         SandwichData(name: "Steak", sauceAmount: .tooMuch, imageName: "sandwich6"),
-                         SandwichData(name: "Dunno", sauceAmount: .tooMuch, imageName: "sandwich7"),
-                         SandwichData(name: "Torta", sauceAmount: .tooMuch, imageName: "sandwich8"),
-                         SandwichData(name: "Ham", sauceAmount: .tooMuch, imageName: "sandwich9"),
-                         SandwichData(name: "Lettuce", sauceAmount: .tooMuch, imageName: "sandwich10")]
-    sandwiches.append(contentsOf: sandwichArray)
+//    let sandwichArray = [SandwichData(name: "Bagel Toast", sauceAmount: .none, imageName: "sandwich1"),
+//                         SandwichData(name: "Bologna", sauceAmount: .none, imageName: "sandwich2"),
+//                         SandwichData(name: "Breakfast Roll", sauceAmount: .none, imageName: "sandwich3"),
+//                         SandwichData(name: "Club", sauceAmount: .none, imageName: "sandwich4"),
+//                         SandwichData(name: "Sub", sauceAmount: .none, imageName: "sandwich5"),
+//                         SandwichData(name: "Steak", sauceAmount: .tooMuch, imageName: "sandwich6"),
+//                         SandwichData(name: "Dunno", sauceAmount: .tooMuch, imageName: "sandwich7"),
+//                         SandwichData(name: "Torta", sauceAmount: .tooMuch, imageName: "sandwich8"),
+//                         SandwichData(name: "Ham", sauceAmount: .tooMuch, imageName: "sandwich9"),
+//                         SandwichData(name: "Lettuce", sauceAmount: .tooMuch, imageName: "sandwich10")]
+//    sandwiches.append(contentsOf: sandwichArray)
+    
+    // Homework - part 2 (Loading Objects form JSON)
+    let sandwichPath = Bundle.main.path(forResource: "sandwiches", ofType: "json")!
+    let sandwichURL = URL(fileURLWithPath: sandwichPath)
+    let data = try! Data(contentsOf: sandwichURL)
+    
+    let decoder = JSONDecoder()
+    let sandwiches = try! decoder.decode([SandwichData].self, from: data)
+    self.sandwiches.append(contentsOf: sandwiches)
   }
 
   func saveSandwich(_ sandwich: SandwichData) {
     sandwiches.append(sandwich)
     tableView.reloadData()
   }
-
+    
   @objc
   func presentAddView(_ sender: Any) {
     performSegue(withIdentifier: "AddSandwichSegue", sender: self)

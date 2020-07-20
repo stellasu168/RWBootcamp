@@ -12,6 +12,7 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    // Homework - from lecture Core data part 1
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "SandwichDataModel")
         container.loadPersistentStores(completionHandler: {
