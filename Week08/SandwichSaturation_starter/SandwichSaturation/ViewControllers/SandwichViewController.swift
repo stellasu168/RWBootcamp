@@ -14,19 +14,33 @@ protocol SandwichDataSource {
 }
 
 class SandwichViewController: UITableViewController, SandwichDataSource {
+    
     let searchController = UISearchController(searchResultsController: nil)
-    var sandwiches = [SandwichData]()
-    var filteredSandwiches = [SandwichData]()
+    //var sandwiches = [SandwichData]()
+    //var filteredSandwiches = [SandwichData]()
     
     // Homework - from lecture Core data part 1
     // Homework - part 1 (Save the selected index into User Defaults)
     let defaults = UserDefaults.standard
-    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var sandwiches = [Sandwich]()
+    var fetchedRC: NSFetchedResultsController<Sandwich>!
+    var filteredSandwiches = [Sandwich]()
+    var query = ""
+    var dontRefreshTable = true
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        loadSandwiches()
+       
+        if(isFirstLaunch()) {
+            refresh()
+            loadSandwiches()
+        } else {
+            refresh()
+        }
+        
+        dontRefreshTable = false
     }
     
   override func viewDidLoad() {
@@ -48,95 +62,175 @@ class SandwichViewController: UITableViewController, SandwichDataSource {
     searchController.searchBar.selectedScopeButtonIndex = defaults.integer(forKey: "selectedScope")
   }
 
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-  }
-  
-    // Seeded with some sandwich data
-  func loadSandwiches() {
-//    let sandwichArray = [SandwichData(name: "Bagel Toast", sauceAmount: .none, imageName: "sandwich1"),
-//                         SandwichData(name: "Bologna", sauceAmount: .none, imageName: "sandwich2"),
-//                         SandwichData(name: "Breakfast Roll", sauceAmount: .none, imageName: "sandwich3"),
-//                         SandwichData(name: "Club", sauceAmount: .none, imageName: "sandwich4"),
-//                         SandwichData(name: "Sub", sauceAmount: .none, imageName: "sandwich5"),
-//                         SandwichData(name: "Steak", sauceAmount: .tooMuch, imageName: "sandwich6"),
-//                         SandwichData(name: "Dunno", sauceAmount: .tooMuch, imageName: "sandwich7"),
-//                         SandwichData(name: "Torta", sauceAmount: .tooMuch, imageName: "sandwich8"),
-//                         SandwichData(name: "Ham", sauceAmount: .tooMuch, imageName: "sandwich9"),
-//                         SandwichData(name: "Lettuce", sauceAmount: .tooMuch, imageName: "sandwich10")]
-//    sandwiches.append(contentsOf: sandwichArray)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refresh()
+    }
     
-    // Homework - part 2 (Loading Objects form JSON)
-    let sandwichPath = Bundle.main.path(forResource: "sandwiches", ofType: "json")!
-    let sandwichURL = URL(fileURLWithPath: sandwichPath)
-    let data = try! Data(contentsOf: sandwichURL)
-    
-    let decoder = JSONDecoder()
-    let sandwiches = try! decoder.decode([SandwichData].self, from: data)
-    self.sandwiches.append(contentsOf: sandwiches)
-  }
-
-  func saveSandwich(_ sandwich: SandwichData) {
-    sandwiches.append(sandwich)
-    tableView.reloadData()
-  }
-    
-  @objc
-  func presentAddView(_ sender: Any) {
-    performSegue(withIdentifier: "AddSandwichSegue", sender: self)
-  }
-  
-  // MARK: - Search Controller
-  var isSearchBarEmpty: Bool {
-    return searchController.searchBar.text?.isEmpty ?? true
-  }
-  
-  func filterContentForSearchText(_ searchText: String,
-                                  sauceAmount: SauceAmount? = nil) {
-    filteredSandwiches = sandwiches.filter { (sandwhich: SandwichData) -> Bool in
-        let doesSauceAmountMatch = sauceAmount == .any || sandwhich.sauceAmount == sauceAmount
-        
-        if isSearchBarEmpty {
-            return doesSauceAmountMatch
-        } else {
-            return doesSauceAmountMatch && sandwhich.name.lowercased()
-                .contains(searchText.lowercased())
+    // Homework - part 3 (Core data)
+    func refresh() {
+        let request = Sandwich.fetchRequest() as NSFetchRequest<Sandwich>
+        let sort = NSSortDescriptor(key: #keyPath(Sandwich.name), ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
+        request.sortDescriptors = [sort]
+        do {
+            fetchedRC = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: #keyPath(Sandwich.name), cacheName: nil)
+            try fetchedRC.performFetch()
+            if let objs = fetchedRC.fetchedObjects {
+                sandwiches = objs
+            }
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
         }
     }
-    tableView.reloadData()
-  }
-  
-  var isFiltering: Bool {
-    let searchBarScopeIsFiltering =
-      searchController.searchBar.selectedScopeButtonIndex != 0
-    return searchController.isActive &&
-      (!isSearchBarEmpty || searchBarScopeIsFiltering)
-  }
-  
-  // MARK: - Table View
-  override func numberOfSections(in tableView: UITableView) -> Int {
-    return 1
-  }
-
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return isFiltering ? filteredSandwiches.count : sandwiches.count
-  }
-
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: "sandwichCell", for: indexPath) as? SandwichCell
-      else { return UITableViewCell() }
     
-    let sandwich = isFiltering ?
-      filteredSandwiches[indexPath.row] :
-      sandwiches[indexPath.row]
+    // Seeded with some sandwich data
+    func loadSandwiches() {
+      
+        // Homework - part 2 (Loading Objects form JSON)
+        //    let sandwichPath = Bundle.main.path(forResource: "sandwiches", ofType: "json")!
+        //    let sandwichURL = URL(fileURLWithPath: sandwichPath)
+        //    let data = try! Data(contentsOf: sandwichURL)
+        //
+        //    let decoder = JSONDecoder()
+        //    let sandwiches = try! decoder.decode([SandwichData].self, from: data)
+        //    self.sandwiches.append(contentsOf: sandwiches)
+        guard let sandwichesJSONURL = Bundle.main.url(forResource: "sandwiches", withExtension: "json") else {
+            return
+        }
+        
+        let decoder = JSONDecoder()
+        
+        do {
+            let sandwichesData = try Data(contentsOf: sandwichesJSONURL)
+            let sandwichArray = try decoder.decode([SandwichData].self, from: sandwichesData)
+            for sandwich in sandwichArray {
+                saveSandwich(sandwich)
+            }
+        } catch let error {
+            print(error)
+        }
+    }
 
-    cell.thumbnail.image = UIImage.init(imageLiteralResourceName: sandwich.imageName)
-    cell.nameLabel.text = sandwich.name
-    cell.sauceLabel.text = sandwich.sauceAmount.description
 
-    return cell
-  }
+    func saveSandwich(_ sandwich: SandwichData) {
+        //    sandwiches.append(sandwich)
+        //    tableView.reloadData()
+        let sandwichData = Sandwich(entity: Sandwich.entity(), insertInto: context)
+        sandwichData.name = sandwich.name
+        sandwichData.imageName = sandwich.imageName
+        sandwichData.sauce = SauceAmountModel(entity: SauceAmountModel.entity(), insertInto: context)
+        sandwichData.sauce?.amount = sandwich.sauceAmount.rawValue
+        sandwiches.append(sandwichData)
+        
+        appDelegate.saveContext()
+        refresh()
+        if(!dontRefreshTable) {
+            tableView.reloadData()
+        }
+    }
+    
+    @objc
+    func presentAddView(_ sender: Any) {
+        performSegue(withIdentifier: "AddSandwichSegue", sender: self)
+    }
+  
+    // MARK: - Search Controller
+    var isSearchBarEmpty: Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearchText(_ searchText: String,
+                                    sauceAmount: SauceAmount? = nil) {
+            filteredSandwiches = sandwiches.filter { (sandwhich: Sandwich) -> Bool in
+                let doesSauceAmountMatch = sauceAmount == .any || sandwhich.sauce?.amount! == sauceAmount?.rawValue
+                
+                if isSearchBarEmpty {
+                    return doesSauceAmountMatch
+                } else {
+                    return doesSauceAmountMatch && sandwhich.name!.lowercased()
+                        .contains(searchText.lowercased())
+                }
+            }
+        
+//        let request = Sandwich.fetchRequest() as NSFetchRequest<Sandwich>
+//
+//        let sandwichNamePredicate = NSPredicate(format: "name CONTAINS [cd]%@", searchController.searchBar.text!)
+//        let saucePredicate = NSPredicate(format: "sauceAmount.sauceAmountString = %@", sauceAmount!.rawValue)
+//        var predicate = NSCompoundPredicate()
+//
+//        if sauceAmount == .any {
+//            predicate = NSCompoundPredicate(type: .and, subpredicates: [sandwichNamePredicate])
+//        } else {
+//            if !isSearchBarEmpty {
+//                predicate = NSCompoundPredicate(type: .and, subpredicates: [sandwichNamePredicate, saucePredicate])
+//            } else {
+//                predicate = NSCompoundPredicate(type: .and, subpredicates: [saucePredicate])
+//            }
+//        }
+//
+//        request.predicate = predicate
+//        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+//        request.sortDescriptors=[sortDescriptor]
+//
+//        do {
+//            filteredSandwiches = try context.fetch(request)
+//        } catch let error as NSError {
+//            print("Error fetching data from context. \(error), \(error.userInfo)")
+//        }
+        
+        tableView.reloadData()
+    }
+  
+    var isFiltering: Bool {
+        // Homework - part 3 (Core data)
+        //searchController.searchBar.selectedScopeButtonIndex = defaults.integer(forKey: "selectedScope")
+        
+        let searchBarScopeIsFiltering =
+            searchController.searchBar.selectedScopeButtonIndex != 0
+        return searchController.isActive &&
+            (!isSearchBarEmpty || searchBarScopeIsFiltering)
+    }
+  
+    // MARK: - Table View
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //return isFiltering ? filteredSandwiches.count : sandwiches.count
+        // Homework - part 3 (Core data)
+        return isFiltering ? filteredSandwiches.count : sandwiches.count
+    }
+
+    // Use Core Data to retrieve data for display in the Table View
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "sandwichCell", for: indexPath) as? SandwichCell
+            else { return UITableViewCell() }
+        
+        //    let sandwich = isFiltering ?
+        //      filteredSandwiches[indexPath.row] : sandwiches[indexPath.row]
+        let sandwich = isFiltering ? filteredSandwiches[indexPath.row] : sandwiches[indexPath.row]
+
+        cell.thumbnail.image = UIImage.init(imageLiteralResourceName: sandwich.imageName!)
+        cell.nameLabel.text = sandwich.name
+        cell.sauceLabel.text = sandwich.sauce?.amount
+
+        return cell
+    }
+    
+    // Deletion
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+       if editingStyle == .delete {
+         let sandwich = sandwiches[indexPath.row]
+         sandwiches.remove(at: indexPath.row)
+         tableView.deleteRows(at: [indexPath], with: .automatic)
+         context.delete(sandwich)
+         appDelegate.saveContext()
+         refresh()
+       }
+     }
 }
+
 
 // MARK: - Helper Functions
 // Homework - part 1 (Save the selected index into User Defaults)
@@ -149,6 +243,14 @@ func determineCurrentScopeSauceAmountIndex(for sauceAmount: SauceAmount?) -> Int
   default:
     return 1
   }
+}
+
+func isFirstLaunch() -> Bool {
+  if !UserDefaults.standard.bool(forKey: "FirstLaunch") {
+    UserDefaults.standard.set(true, forKey: "FirstLaunch")
+    return true
+  }
+  return false
 }
 
 // MARK: - UISearchResultsUpdating

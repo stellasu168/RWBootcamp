@@ -21,6 +21,8 @@
 		7184847024C592A90054556E /* SandwichDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7184846E24C592A90054556E /* SandwichDataModel.xcdatamodeld */; };
 		7184847324C595B20054556E /* Sandwich+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7184847124C595B20054556E /* Sandwich+CoreDataClass.swift */; };
 		7184847424C595B20054556E /* Sandwich+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7184847224C595B20054556E /* Sandwich+CoreDataProperties.swift */; };
+		7184847724C6B38A0054556E /* SauceAmountModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7184847524C6B38A0054556E /* SauceAmountModel+CoreDataClass.swift */; };
+		7184847824C6B38A0054556E /* SauceAmountModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7184847624C6B38A0054556E /* SauceAmountModel+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		7184846F24C592A90054556E /* SandwichDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SandwichDataModel.xcdatamodel; sourceTree = "<group>"; };
 		7184847124C595B20054556E /* Sandwich+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sandwich+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7184847224C595B20054556E /* Sandwich+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sandwich+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7184847524C6B38A0054556E /* SauceAmountModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SauceAmountModel+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7184847624C6B38A0054556E /* SauceAmountModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SauceAmountModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,11 +76,9 @@
 		1255797924AFB8FA004C616F /* SandwichSaturation */ = {
 			isa = PBXGroup;
 			children = (
-				7184847124C595B20054556E /* Sandwich+CoreDataClass.swift */,
-				7184847224C595B20054556E /* Sandwich+CoreDataProperties.swift */,
-				7184846E24C592A90054556E /* SandwichDataModel.xcdatamodeld */,
 				1255797A24AFB8FA004C616F /* AppDelegate.swift */,
 				1255797C24AFB8FA004C616F /* SceneDelegate.swift */,
+				7184847924C6B39B0054556E /* Data */,
 				12A0791224AFDD810097F149 /* Model */,
 				1255799424AFCBDE004C616F /* View */,
 				12A0790F24AFDC2F0097F149 /* ViewControllers */,
@@ -113,6 +115,18 @@
 				12A0791324AFDD8E0097F149 /* SandwichData.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		7184847924C6B39B0054556E /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				7184847524C6B38A0054556E /* SauceAmountModel+CoreDataClass.swift */,
+				7184847624C6B38A0054556E /* SauceAmountModel+CoreDataProperties.swift */,
+				7184847124C595B20054556E /* Sandwich+CoreDataClass.swift */,
+				7184847224C595B20054556E /* Sandwich+CoreDataProperties.swift */,
+				7184846E24C592A90054556E /* SandwichDataModel.xcdatamodeld */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,10 +203,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				7184847024C592A90054556E /* SandwichDataModel.xcdatamodeld in Sources */,
+				7184847724C6B38A0054556E /* SauceAmountModel+CoreDataClass.swift in Sources */,
 				1255799324AFCBD7004C616F /* SandwichCell.swift in Sources */,
 				12A0791124AFDC5C0097F149 /* AddSandwichViewController.swift in Sources */,
 				1255797B24AFB8FA004C616F /* AppDelegate.swift in Sources */,
 				7184847324C595B20054556E /* Sandwich+CoreDataClass.swift in Sources */,
+				7184847824C6B38A0054556E /* SauceAmountModel+CoreDataProperties.swift in Sources */,
 				1255797D24AFB8FA004C616F /* SceneDelegate.swift in Sources */,
 				7184847424C595B20054556E /* Sandwich+CoreDataProperties.swift in Sources */,
 				1255797F24AFB8FA004C616F /* SandwichViewController.swift in Sources */,
