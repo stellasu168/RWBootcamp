@@ -11,5 +11,9 @@ import Foundation
 class Networking {
 
     static let sharedInstance = Networking()
+    
+    func getRandomCategory(completion: categoryId ) {
+        
+    }
 
 }

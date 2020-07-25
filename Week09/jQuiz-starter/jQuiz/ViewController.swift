@@ -39,6 +39,16 @@ class ViewController: UIViewController {
         
     }
 
+    func getClues(){
+        Networking.sharedInstance.getRandomCategory(completion: { (categoryId) in
+            guard let id = categoryId else { return }
+            Networking.sharedInstance.getAllCluesInCategory(categoryId: id) { (clues) in
+                self.clues = clues
+                self.setUpView()
+            }
+        })
+    }
+    
     @IBAction func didPressVolumeButton(_ sender: Any) {
         SoundManager.shared.toggleSoundPreference()
         if SoundManager.shared.isSoundEnabled == false {
