@@ -8,24 +8,18 @@
 
 import Foundation
 
-struct Clue {
-    var id: Int
-    var answer : String
-    var question : String
-    var value : Int
-    var airdate: String
-    var created_at: String
-    var updated_at: String
-    var category_id: Int
-    var game_id : Int
-    var invalid_count: Int
-    var category : Category
+struct Clue: Codable {
+    let id: Int
+    let answer : String
+    let question : String
+    let value : Int
+    //let categoryId: Int
+    //let gameId : Int
+    let category : Category
 }
 
-struct Category {
-    var id : Int
-    var title : String
-    var created_at : String
-    var updated_at : String
-    var clues_count : Int
+struct Category: Codable {
+    let id : Int
+    let title : String
+    //let cluesCount : Int
 }

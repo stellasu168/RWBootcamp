@@ -27,6 +27,8 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         
+        getClues()
+        
         self.scoreLabel.text = "\(self.points)"
 
         if SoundManager.shared.isSoundEnabled == false {
@@ -44,7 +46,8 @@ class ViewController: UIViewController {
             guard let id = categoryId else { return }
             Networking.sharedInstance.getAllCluesInCategory(categoryId: id) { (clues) in
                 self.clues = clues
-                self.setUpView()
+                print("Clues = \(self.clues)")
+                //self.setUpView()
             }
         })
     }
