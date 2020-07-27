@@ -12,10 +12,10 @@ struct Clue: Codable {
     let id: Int
     let answer : String
     let question : String
-    let value : Int
+    //let value : Int
     //let categoryId: Int
-    //let gameId : Int
-    let category : Category
+    var points : Int? = 0
+    var category : Category
 }
 
 struct Category: Codable {

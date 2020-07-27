@@ -20,15 +20,18 @@ class ViewController: UIViewController {
     var clues: [Clue] = []
     var correctAnswerClue: Clue?
     var points: Int = 0
-
+    var answers: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
         
-        getClues()
+        //getClues()
         
+        self.clueLabel.text = ""
+        self.categoryLabel.text = ""
         self.scoreLabel.text = "\(self.points)"
 
         if SoundManager.shared.isSoundEnabled == false {
@@ -39,18 +42,20 @@ class ViewController: UIViewController {
 
         SoundManager.shared.playSound()
         
+        populateQuestions()
+        
     }
 
-    func getClues(){
-        Networking.sharedInstance.getRandomCategory(completion: { (categoryId) in
-            guard let id = categoryId else { return }
-            Networking.sharedInstance.getAllCluesInCategory(categoryId: id) { (clues) in
-                self.clues = clues
-                print("Clues = \(self.clues)")
-                //self.setUpView()
-            }
-        })
-    }
+//    func getClues(){
+//        Networking.sharedInstance.getRandomCategory(completion: { (categoryId) in
+//            guard let id = categoryId else { return }
+//            Networking.sharedInstance.getAllCluesInCategory(categoryId: id) { (clues) in
+//                self.clues = clues
+//                //print("Clues = \(self.clues)")
+//                //self.setUpView()
+//            }
+//        })
+//    }
     
     @IBAction func didPressVolumeButton(_ sender: Any) {
         SoundManager.shared.toggleSoundPreference()
@@ -65,7 +70,8 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return clues.count
+        return answers.count
+        
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -74,11 +80,39 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
+        cell.textLabel?.text = answers[indexPath.row]
+        cell.backgroundColor = view.backgroundColor
+        
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+          if answers[indexPath.row] == correctAnswerClue?.answer {
+            points += 100
+            self.scoreLabel.text = "\(self.points)"
+          }
+          populateQuestions()
     }
+    
 }
 
+extension ViewController {
+  
+  func populateQuestions() {
+    Networking.sharedInstance.getRandomCategory { [weak self] category in
+      Networking.sharedInstance.getAllCluesInCategory(category) { clues in
+        DispatchQueue.main.async {
+          guard let self = self else { return }
+          
+          let randomClues = clues.shuffled()
+          self.correctAnswerClue = randomClues.first
+          self.answers = Array(randomClues.prefix(4).map(\.answer)).shuffled()
+          self.categoryLabel.text = category.title
+          self.clueLabel.text = self.correctAnswerClue?.question ?? "N/A"
+          self.tableView.reloadData()
+        }
+      }
+    }
+  }
+  
+}
