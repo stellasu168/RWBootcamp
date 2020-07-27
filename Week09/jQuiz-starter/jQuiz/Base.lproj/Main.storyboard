@@ -55,6 +55,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kvh-k4-ezN">
+                                <rect key="frame" x="355" y="808" width="39" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="checkmark"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -79,6 +84,7 @@
                     </view>
                     <connections>
                         <outlet property="categoryLabel" destination="RMY-cr-kf3" id="X86-DI-Hpn"/>
+                        <outlet property="checkMarkButton" destination="kvh-k4-ezN" id="hEg-IS-Olf"/>
                         <outlet property="clueLabel" destination="IW7-gs-GWY" id="FIM-dl-6xE"/>
                         <outlet property="logoImageView" destination="pK8-df-Hfb" id="9oD-GH-uVb"/>
                         <outlet property="scoreLabel" destination="au0-8X-o1t" id="7EV-50-xd8"/>
@@ -92,6 +98,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="checkmark" width="64" height="64"/>
         <image name="jQuizImage" width="800" height="450"/>
         <image name="speaker" catalog="system" width="128" height="121"/>
     </resources>

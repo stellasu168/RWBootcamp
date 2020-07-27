@@ -16,7 +16,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var clueLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var scoreLabel: UILabel!
-
+    @IBOutlet weak var checkMarkButton: UIButton!
+    
     var clues: [Clue] = []
     var correctAnswerClue: Clue?
     var points: Int = 0
@@ -28,11 +29,10 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         
-        //getClues()
-        
         self.clueLabel.text = ""
         self.categoryLabel.text = ""
         self.scoreLabel.text = "\(self.points)"
+        self.checkMarkButton.isEnabled = false
 
         if SoundManager.shared.isSoundEnabled == false {
             soundButton.setImage(UIImage(systemName: "speaker.slash"), for: .normal)
@@ -42,8 +42,7 @@ class ViewController: UIViewController {
 
         SoundManager.shared.playSound()
         
-        populateQuestions()
-        
+        getQuestionAndClues()
     }
 
 //    func getClues(){
@@ -71,7 +70,6 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return answers.count
-        
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -80,36 +78,39 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 20.0)
         cell.textLabel?.text = answers[indexPath.row]
         cell.backgroundColor = view.backgroundColor
-        
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-          if answers[indexPath.row] == correctAnswerClue?.answer {
+        if answers[indexPath.row] == correctAnswerClue?.answer {
             points += 100
+            self.checkMarkButton.isEnabled = true
             self.scoreLabel.text = "\(self.points)"
-          }
-          populateQuestions()
+        }
+        print("The correct answer is \(String(describing: correctAnswerClue?.answer))")
+        // Get the next set of question
+        getQuestionAndClues()
     }
     
 }
 
 extension ViewController {
-  
-  func populateQuestions() {
+  func getQuestionAndClues() {
     Networking.sharedInstance.getRandomCategory { [weak self] category in
       Networking.sharedInstance.getAllCluesInCategory(category) { clues in
         DispatchQueue.main.async {
           guard let self = self else { return }
-          
           let randomClues = clues.shuffled()
           self.correctAnswerClue = randomClues.first
+          // Limit the number of clues to 4
           self.answers = Array(randomClues.prefix(4).map(\.answer)).shuffled()
           self.categoryLabel.text = category.title
           self.clueLabel.text = self.correctAnswerClue?.question ?? "N/A"
           self.tableView.reloadData()
+          self.checkMarkButton.isEnabled = false
         }
       }
     }
