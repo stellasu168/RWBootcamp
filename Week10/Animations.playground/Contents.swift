@@ -17,10 +17,6 @@ extension UIView {
 //: ## Setup
 // Use this dispatch group:
 let animationGroup = DispatchGroup()
-// This should only print once all the animations are complete
-animationGroup.notify(queue: DispatchQueue.main) {
-  print("Animations Completed!")
-}
 //: ## Views
 //: The animation uses the following views
 // A red square
@@ -48,4 +44,9 @@ UIView.animate(withDuration: 4, animations: { () -> Void in
   // Change background color to blue
   view.backgroundColor = UIColor.blue
 })
+
+// This should only print once all the animations are complete
+animationGroup.notify(queue: DispatchQueue.main) {
+  print("Animations Completed!")
+}
 //: __Note:__ Manually stop execution of this playground when the animation finishes: click the stop button below.
