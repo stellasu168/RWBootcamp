@@ -11,6 +11,13 @@ extension UIView {
   static func animate(withDuration duration: TimeInterval, animations: @escaping () -> Void, group: DispatchGroup, completion: ((Bool) -> Void)?) {
     
   // TODO: Fill in this implementation
+    group.enter()
+    UIView.animate(withDuration: duration, animations: {
+        animations()
+    }) { (result) in
+        defer { group.leave() }
+        completion? (result)
+    }
   
   }
 }
@@ -26,27 +33,28 @@ view.backgroundColor = UIColor.red
 let box = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
 box.backgroundColor = UIColor.yellow
 view.addSubview(box)
-// Note: Enable Xcode▸Editor▸Live View to see the animation.
-PlaygroundPage.current.liveView = view
+
+
 //: **Step 2**: Rewrite the following animation to be notified when all sub-animations complete:
 UIView.animate(withDuration: 1, animations: {
   // Move box to lower right corner
   box.center = CGPoint(x: 150, y: 150)
-  }, completion: {
-    _ in
+}, group: animationGroup) { (result) in
     UIView.animate(withDuration: 2, animations: {
       // Rotate box 45 degrees
       box.transform = CGAffineTransform(rotationAngle: .pi/4)
-      }, completion: .none)
-})
+    }, group: animationGroup, completion: .none)
+}
 
-UIView.animate(withDuration: 4, animations: { () -> Void in
+UIView.animate(withDuration: 4, animations: {
   // Change background color to blue
   view.backgroundColor = UIColor.blue
-})
+}, group: animationGroup, completion: .none)
 
 // This should only print once all the animations are complete
 animationGroup.notify(queue: DispatchQueue.main) {
   print("Animations Completed!")
 }
 //: __Note:__ Manually stop execution of this playground when the animation finishes: click the stop button below.
+// Note: Enable Xcode▸Editor▸Live View to see the animation.
+PlaygroundPage.current.liveView = view
